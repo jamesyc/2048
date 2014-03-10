@@ -226,8 +226,18 @@ hr {
     z-index: 1;
   }
 
+
   .grid-row {
     margin-bottom: $grid-spacing;
+
+    .score-sharing {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+
+    @include animation(fade-in 800ms ease $transition-speed * 12);
+    @include animation-fill-mode(both);
 
     &:last-child {
       margin-bottom: 0;
