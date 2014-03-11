@@ -425,6 +425,16 @@ hr {
   margin-top: 50px;
 }
 
+.sharing {
+  margin-top: 20px;
+  text-align: center;
+
+  > iframe, span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
 @include smaller(480px) {
   // Redefine variables for smaller screens
   $field-width: 280px;
