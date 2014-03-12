@@ -61,6 +61,12 @@ KeyboardInputManager.prototype.listen = function () {
   keepPlaying.addEventListener("click", this.keepPlaying.bind(this));
   keepPlaying.addEventListener("touchend", this.keepPlaying.bind(this));
 
+  var quicksave = document.getElementsByClassName("quicksave")[0];
+  quicksave.addEventListener("click", this.quicksave.bind(this));
+  var quickload = document.getElementsByClassName("quickload")[0];
+  quickload.addEventListener("click", this.quickload.bind(this));
+
+
   // Listen to swipe events
   var touchStartClientX, touchStartClientY;
   var gameContainer = document.getElementsByClassName("game-container")[0];
@@ -101,4 +107,12 @@ KeyboardInputManager.prototype.restart = function (event) {
 KeyboardInputManager.prototype.keepPlaying = function (event) {
   event.preventDefault();
   this.emit("keepPlaying");
+
+KeyboardInputManager.prototype.quicksave = function (event) {
+  event.preventDefault();
+  this.emit("quicksave");
+};
+KeyboardInputManager.prototype.quickload = function (event) {
+  event.preventDefault();
+  this.emit("quickload");
 };
