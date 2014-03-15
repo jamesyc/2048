@@ -116,14 +116,11 @@ KeyboardInputManager.prototype.restart = function (event) {
   this.emit("restart");
 };
 
-<<<<<<< HEAD
 KeyboardInputManager.prototype.keepPlaying = function (event) {
   event.preventDefault();
   this.emit("keepPlaying");
 };
 
-=======
->>>>>>> FETCH_HEAD
 KeyboardInputManager.prototype.quicksave = function (event) {
   event.preventDefault();
   this.emit("quicksave");

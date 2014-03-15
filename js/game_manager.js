@@ -198,8 +198,6 @@ GameManager.prototype.quicksaveGridCopy = function () {
   }
 };
 
-<<<<<<< HEAD
-=======
 // Quicksave
 GameManager.prototype.quicksave = function () {
   // Copy values of this.grid into this.quicksaveGrid, for backup
@@ -242,8 +240,6 @@ GameManager.prototype.quicksaveGridCopy = function () {
     }
   }
 };
-
->>>>>>> FETCH_HEAD
 
 // Save all tile positions and remove merger info
 GameManager.prototype.prepareTiles = function () {
