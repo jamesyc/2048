@@ -19,6 +19,15 @@ function GameManager(size, InputManager, Actuator, ScoreManager) {
   this.quicksaveWon = false;
 
 
+  this.inputManager.on("quicksave", this.quicksave.bind(this));
+  this.inputManager.on("quickload", this.quickload.bind(this));
+
+  this.quicksaveGrid = {};
+  this.quicksaveScore = 0;
+  this.quicksaveOver = false;
+  this.quicksaveWon = false;
+
+
   this.setup();
   this.quicksave();
   
@@ -92,6 +101,50 @@ GameManager.prototype.actuate = function () {
   });
 
 };
+
+// Quicksave
+GameManager.prototype.quicksave = function () {
+  // Copy values of this.grid into this.quicksaveGrid, for backup
+  this.quicksaveGridCopy();
+  // Backup other values
+  this.quicksaveScore = this.score;
+  this.quicksaveOver = this.over;
+  this.quicksaveWon = this.won;  
+};
+// Quickload
+GameManager.prototype.quickload = function () {
+  // Check if game over
+  if (this.over) {
+    this.actuator.restart();
+  }
+  // Restore this.grid
+  this.grid = this.quicksaveGrid;
+  // Copy values of this.grid into this.quicksaveGrid, for backup (THIS STEP NEEDED FOR MULTIPLE QUICKLOADS)
+  this.quicksaveGridCopy();
+  // Restore other values
+  this.score = this.quicksaveScore;
+  this.over = this.quicksaveOver;
+  this.won = this.quicksaveWon;
+  this.actuator.actuate(this.grid, {
+    score: this.score,
+    over:  this.over,
+    won:   this.won
+  });
+
+};
+// Copy this.grid into this.quicksaveGrid
+GameManager.prototype.quicksaveGridCopy = function () {
+  this.quicksaveGrid = new Grid(this.size);
+  for (var x = 0; x < this.size; x++) {
+    for (var y = 0; y < this.size; y++) {
+      if (this.grid.cells[x][y]) {
+        // Make new tile
+        this.quicksaveGrid.cells[x][y] = new Tile({ x: this.grid.cells[x][y].x, y: this.grid.cells[x][y].y }, this.grid.cells[x][y].value);
+      }
+    }
+  }
+};
+
 
 // Quicksave
 GameManager.prototype.quicksave = function () {
